@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h> 
+#include <string.h> 
+//\n
+
+    struct veiculos {
+        int veiculoID; // numerico ou igual placa de carro??
+        char tipo_veiculo[20]; // moto, caminhão, carro, etc...
+        float carga_veiculo; // em KG    
+        char status_veiculo[10]; // disponível ou ocupado
+    };
+    
+    struct entregas {
+        int entregaID;
+        char origem[100]; // endereço
+        char destino[100]; // endereco
+        float tempo; // Em horas
+    };
+    
+    struct funcionario {
+        int funcionarioID;
+        char nome_funcionario[50];
+    };
+    
+    struct cliente {
+        int clienteID;
+        char nome_cliente[50];
+        char endereco[100];
+        char tipo_servico[20];
+    };
+    
+    void info_veiculo (struct veiculos veiculo) {
+        FILE *fv = fopen("Veiculos.txt","a");
+        if (fv == NULL) {
+            printf("Erro ao abrir arquivo.");
+            system("Pause");
+            exit(1);
+        }
+            fprintf(fv, "%d,%s,%.2f,%s\n", veiculo.veiculoID, veiculo.tipo_veiculo, veiculo.carga_veiculo, veiculo.status_veiculo);
+            fclose(fv);
+            printf("As informações do veículo estão salvas no sistema!\n");
+    }
+    
+    int main () {
+    struct veiculos veiculo;
+    printf("Informe os dados do veículo: \n");
+    printf("\n");
+    printf("ID do Veículo: ");
+    scanf("%d", &veiculo.veiculoID);
+    printf("\n");
+    printf("Tipo de veículo: ");
+    scanf("%s", veiculo.tipo_veiculo);
+    printf("\n");
+    printf("Carga que o veículo carrega: ");
+    scanf("%f", &veiculo.carga_veiculo);
+    printf("\n");
+    printf("Status veiculo: ");
+    scanf("%s", veiculo.status_veiculo);
+    printf("\n");
+    info_veiculo(veiculo);
+    
+    return 0; 
+}
