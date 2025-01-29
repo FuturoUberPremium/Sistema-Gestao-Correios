@@ -17,12 +17,12 @@
         float tempo; // Em horas
     };
     
-    struct funcionario {
+    struct funcionarios {
         int funcionarioID;
         char nome_funcionario[50];
     };
     
-    struct cliente {
+    struct clientes {
         int clienteID;
         char nome_cliente[50];
         char endereco[100];
@@ -83,15 +83,41 @@
     scanf("%f", &entrega->tempo);
     }
     
+    void info_funcionarios (struct funcionarios funcionario) {
+        FILE *ff = fopen("Funcionarios.txt","w"); 
+        if (ff == NULL) {
+            printf("Erro ao abrir arquivo.");
+            system("Pause");
+            exit(1);    
+        }
+        fprintf(ff, "ID do funcionario: %d\nNome do funcionario: %s\n", funcionario.funcionarioID , funcionario.nome_funcionario);
+            fclose(ff);
+            printf("\nAs informações do funcionario estão salvas no sistema!\n");
+    }
+    
+    void dados_funcionarios (struct funcionarios *funcionario) {
+        printf("\nInforme os dados do funcionario:\n");
+        printf("ID do funcionario: \n");
+        scanf("%d", &funcionario->funcionarioID);
+
+        printf("Nome do funcionario: \n");
+        scanf("%s", funcionario->nome_funcionario);
+    }
+    
+    
 int main() {
     struct veiculos veiculo;
     struct entregas entrega;
+    struct funcionarios funcionario;
     
     Dados_Veiculo(&veiculo);
     info_veiculo(veiculo);
     
     Dados_Entrega(&entrega);
     info_entrega(entrega);
+    
+    dados_funcionarios(&funcionario);
+    info_funcionarios(funcionario);
     
     return 0; 
 }
