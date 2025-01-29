@@ -30,7 +30,7 @@
     };
     
     void info_veiculo (struct veiculos veiculo) {
-        FILE *fv = fopen("Veiculos.txt","w");
+        FILE *fv = fopen("Veiculos.txt","a");
         if (fv == NULL) {
             printf("Erro ao abrir arquivo.");
             system("Pause");
@@ -57,7 +57,7 @@
 }
 
     void info_entrega (struct entregas entrega) {
-        FILE *fe = fopen("Entregas.txt","w"); 
+        FILE *fe = fopen("Entregas.txt","a"); 
         if (fe == NULL) {
             printf("Erro ao abrir arquivo.");
             system("Pause");
@@ -84,7 +84,7 @@
     }
     
     void info_funcionarios (struct funcionarios funcionario) {
-        FILE *ff = fopen("Funcionarios.txt","w"); 
+        FILE *ff = fopen("Funcionarios.txt","a"); 
         if (ff == NULL) {
             printf("Erro ao abrir arquivo.");
             system("Pause");
@@ -104,11 +104,41 @@
         scanf("%s", funcionario->nome_funcionario);
     }
     
+    void info_clientes(struct clientes cliente) {
+    FILE *fc = fopen("Clientes.txt", "a"); 
+    if (fc == NULL) {
+        printf("Erro ao abrir arquivo.");
+        system("Pause");
+        exit(1);    
+    }
+    fprintf(fc, "ID do cliente: %d\nNome do cliente: %s\nEndereco: %s\nTipo de servico: %s\n", 
+            cliente.clienteID, cliente.nome_cliente, cliente.endereco, cliente.tipo_servico);
+    fclose(fc);
+    printf("\nAs informacoes do cliente estao salvas no sistema!\n");
+}
+
+void dados_clientes(struct clientes *cliente) {
+    printf("\nInforme os dados do cliente:\n");
+    printf("ID do cliente: \n");
+    scanf("%d", &cliente->clienteID);
+
+    printf("Nome do cliente: \n");
+    scanf("%s", cliente->nome_cliente);
+    
+    printf("Endereco: \n");
+    scanf("%s", cliente->endereco);
+    
+    printf("Tipo de servico: \n");
+    scanf("%s", cliente->tipo_servico);
+}
+
+    
     
 int main() {
     struct veiculos veiculo;
     struct entregas entrega;
     struct funcionarios funcionario;
+    struct clientes cliente;
     
     Dados_Veiculo(&veiculo);
     info_veiculo(veiculo);
@@ -119,5 +149,7 @@ int main() {
     dados_funcionarios(&funcionario);
     info_funcionarios(funcionario);
     
+    dados_clientes(&cliente);
+    info_clientes(cliente);
     return 0; 
 }
